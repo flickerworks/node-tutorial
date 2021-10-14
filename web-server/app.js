@@ -3,7 +3,7 @@ const hbs = require('hbs');
 const express = require('express');
 const axios = require('axios').default;
 const app = express();
-
+const port = process.env.PORT || 3000;
 const staticExpressPath = path.join(__dirname, '../public');
 // const viewsPath = path.join(__dirname, '../src');
  const partialsPath = path.join(__dirname, '/partials');
@@ -62,6 +62,6 @@ app.get('/employees', function(req, res){
 })
 
 
-app.listen('3000', function(){
-    console.log('The server has started...')
+app.listen(port, function(){
+    console.log('server is up on port '+port)
 })
