@@ -5,14 +5,14 @@ const axios = require('axios').default;
 const app = express();
 const port = process.env.PORT || 3000;
 const staticExpressPath = path.join(__dirname, '../public');
-// const viewsPath = path.join(__dirname, '../src');
+const viewsPath = path.join(__dirname, './templates');
  const partialsPath = path.join(__dirname, '/partials');
 hbs.registerPartials(partialsPath)
 
 app.set('view engine', 'hbs')
 
 //to change handler default dir (views) to src
-// app.set('views', viewsPath) 
+app.set('views', viewsPath) 
 
 
 //setup static directory to serve pages
