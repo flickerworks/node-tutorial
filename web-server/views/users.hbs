@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <title>Employees</title>
+    <script>
+        var Employees=[];
+        fetch('http://localhost:3000/employees?page=1').then(response => {
+            Employees = response.json().then(data => {
+                if(data.error){
+                    console.log(data.error);
+                    return;
+                }
+                Employees = data;
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const th1 = document.createElement('th');
+                th1.innerText = 'ID';
+                const th2 = document.createElement('th');
+                th2.innerText = 'First Name';
+                const th3 = document.createElement('th');
+                th3.innerText = 'Last Name';
+                thead.appendChild(th1);
+                thead.appendChild(th2);
+                thead.appendChild(th3);
+                table.appendChild(thead);
+                
+                
+                if(data.length){
+                    data.forEach(user => {
+                        const tr = document.createElement('tr');
+                        const id = document.createElement('td');
+                        id.innerText = user.id;
+                        const fName = document.createElement('td');
+                        fName.innerText = user.first_name;
+                        const lName = document.createElement('td');
+                        lName.innerText = user.last_name;
+                        tr.appendChild(id);
+                        tr.appendChild(fName);
+                        tr.appendChild(lName);
+                        tbody.appendChild(tr)                        
+                    })
+                    table.appendChild(tbody);
+                    document.querySelector('.list').appendChild(table);
+                }
+            });
+            
+        })
+    </script>
+</head>
+<body>
+    {{>header}}
+
+    <div class="container">
+        <p>{{about}}</p>
+
+        <div class="list">
+
+        </div>
+    </div>    
+</body>
+</html>
